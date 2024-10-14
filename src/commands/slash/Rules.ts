@@ -146,11 +146,16 @@ export default class extends Command {
 					.setCustomId(nextId ?? '')
 					.setStyle(ButtonStyle.Secondary)
 					.setEmoji(parseEmoji('▶️') as APIMessageComponentEmoji)
-					.setDisabled(p >= rules.length - 1)
+					.setDisabled(p >= rules.length)
 			);
 		const embed = getInitialEmbed();
 		const buttons = getButtonComponents(page);
-		const reply = await interaction.reply({ embeds: [embed], components: [buttons], fetchReply: true });
+		const reply = await interaction.reply({
+			embeds: [embed],
+			components: [buttons],
+			fetchReply: true,
+			ephemeral: true
+		});
 		const filter = (i: ButtonInteraction) => i.user.id === interaction.user.id;
 		const collector = reply.createMessageComponentCollector({
 			filter,
@@ -161,7 +166,7 @@ export default class extends Command {
 		collector.on('collect', async (i) => {
 			if (i.customId === previousId && page > 0) {
 				page--;
-			} else if (i.customId === nextId && page < rules.length - 1) {
+			} else if (i.customId === nextId && page < rules.length) {
 				page++;
 			}
 
