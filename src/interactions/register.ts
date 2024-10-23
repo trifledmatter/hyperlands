@@ -48,6 +48,7 @@ async function registerCommands(): Promise<void> {
 	}
 
 	const commands = await loadCommands();
+	commands.map((command) => console.log(command));
 	const rest = new REST({ version: '10' }).setToken(token);
 
 	try {

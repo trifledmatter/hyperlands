@@ -11,6 +11,7 @@
       "#interactions/*": ["./src/interactions/*"],
       "#lib/*": ["./src/lib/*"],
       "#types/*": ["./src/types/*"],
+      "#models/*": ["./src/models/*"],
       "#src/*": ["./src/*"]
     },
     "resolveJsonModule": true,
